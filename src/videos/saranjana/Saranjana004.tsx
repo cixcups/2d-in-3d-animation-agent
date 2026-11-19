@@ -150,25 +150,25 @@ const Title: React.FC<{ children: React.ReactNode; top?: number }> = ({ children
 const SceneOne: React.FC = () => {
   const f = useCurrentFrame();
   const x = interpolate(f, [0, 180], [250, 345], clamp);
-  return <AbsoluteFill><Backdrop frame={f} cityOpacity={0.92} /><BangStick x={x} y={1510} scale={1.08} mood="shock" frame={f} /><Title top={310}>KOTA MISTERIUS?</Title><Caption>Bayangkan... ada kota yang katanya lebih modern dari Jakarta!</Caption></AbsoluteFill>;
+  return <AbsoluteFill><Backdrop frame={f} cityOpacity={0.92} /><BangStick x={x} y={1380} scale={1.08} mood="shock" frame={f} /><Title top={310}>KOTA MISTERIUS?</Title><Caption>Bayangkan... ada kota yang katanya lebih modern dari Jakarta!</Caption></AbsoluteFill>;
 };
 
 const SceneTwo: React.FC = () => {
   const f = useCurrentFrame();
   const zoom = interpolate(f, [0, 270], [0.93, 1.08], clamp);
-  return <AbsoluteFill><div style={{ position: "absolute", inset: 0, transform: `scale(${zoom})` }}><Backdrop frame={f} cityOpacity={1} wide /></div><BangStick x={235} y={1540} scale={0.84} mood="point" frame={f} /><Title top={270}>KOTA GAIB<br/>SARANJANA!</Title><Caption>Konon, Saranjana berada di Pulau Laut, Kalimantan Selatan.</Caption></AbsoluteFill>;
+  return <AbsoluteFill><div style={{ position: "absolute", inset: 0, transform: `scale(${zoom})` }}><Backdrop frame={f} cityOpacity={1} wide /></div><BangStick x={235} y={1410} scale={0.84} mood="point" frame={f} /><Title top={270}>KOTA GAIB<br/>SARANJANA!</Title><Caption>Konon, Saranjana berada di Pulau Laut, Kalimantan Selatan.</Caption></AbsoluteFill>;
 };
 
 const SceneThree: React.FC = () => {
   const f = useCurrentFrame();
   const glow = 0.5 + 0.3 * Math.sin(f * 0.11);
-  return <AbsoluteFill><Backdrop frame={f} cityOpacity={1} wide /><div style={{ position: "absolute", top: 680, left: 0, right: 0, textAlign: "center", color: "#9cf3ff", fontFamily: "Arial Black, Arial", fontSize: 36, fontWeight: 900, textShadow: `0 0 24px rgba(50,220,255,${glow})` }}>GEDUNG MEGAH • JALANAN LUAS</div><BangStick x={350} y={1530} scale={0.95} mood="curious" frame={f} /><Caption>Menurut cerita masyarakat, kota ini punya bangunan megah dan teknologi maju.</Caption></AbsoluteFill>;
+  return <AbsoluteFill><Backdrop frame={f} cityOpacity={1} wide /><div style={{ position: "absolute", top: 680, left: 0, right: 0, textAlign: "center", color: "#9cf3ff", fontFamily: "Arial Black, Arial", fontSize: 36, fontWeight: 900, textShadow: `0 0 24px rgba(50,220,255,${glow})` }}>GEDUNG MEGAH • JALANAN LUAS</div><BangStick x={350} y={1400} scale={0.95} mood="curious" frame={f} /><Caption>Menurut cerita masyarakat, kota ini punya bangunan megah dan teknologi maju.</Caption></AbsoluteFill>;
 };
 
 const SceneFour: React.FC = () => {
   const f = useCurrentFrame();
   const x = interpolate(f, [0, 360], [220, 590], clamp);
-  return <AbsoluteFill><Backdrop frame={f} cityOpacity={0.58} fog wide /><BangStick x={x} y={1530} scale={0.97} mood="determined" frame={f} walking /><Caption>Ada pula cerita orang-orang yang mengaku pernah melihat kota misterius ini.</Caption></AbsoluteFill>;
+  return <AbsoluteFill><Backdrop frame={f} cityOpacity={0.58} fog wide /><BangStick x={x} y={1400} scale={0.97} mood="determined" frame={f} walking /><Caption>Ada pula cerita orang-orang yang mengaku pernah melihat kota misterius ini.</Caption></AbsoluteFill>;
 };
 
 const SceneFive: React.FC = () => {
@@ -180,7 +180,7 @@ const SceneFive: React.FC = () => {
 const SceneSix: React.FC = () => {
   const f = useCurrentFrame();
   const pulse = 1 + 0.025 * Math.sin(f * 0.18);
-  return <AbsoluteFill><Backdrop frame={f} cityOpacity={0.22} purple fog /><BangStick x={285} y={1500} scale={1.16 * pulse} mood="determined" frame={f} /><div style={{ position: "absolute", left: 510, right: 38, top: 660, textAlign: "center", fontFamily: "Arial Black, Arial", fontWeight: 1000, fontSize: 76, lineHeight: 1.03, color: "#fff", WebkitTextStroke: "4px #120a24", textShadow: "0 8px 0 #000" }}>MISTIS<br/><span style={{ color: "#ffd83f" }}>ATAU</span><br/><span style={{ color: "#ffdd39" }}>SAINS?</span></div><div style={{ position: "absolute", left: 50, right: 50, bottom: 130, textAlign: "center", color: "#fff", fontFamily: "Arial, sans-serif", fontWeight: 900, fontSize: 34, textShadow: "0 4px 12px #000" }}>TULIS PENDAPATMU DI KOMENTAR!</div></AbsoluteFill>;
+  return <AbsoluteFill><Backdrop frame={f} cityOpacity={0.22} purple fog /><BangStick x={285} y={1370} scale={1.16 * pulse} mood="determined" frame={f} /><div style={{ position: "absolute", left: 510, right: 38, top: 660, textAlign: "center", fontFamily: "Arial Black, Arial", fontWeight: 1000, fontSize: 76, lineHeight: 1.03, color: "#fff", WebkitTextStroke: "4px #120a24", textShadow: "0 8px 0 #000" }}>MISTIS<br/><span style={{ color: "#ffd83f" }}>ATAU</span><br/><span style={{ color: "#ffdd39" }}>SAINS?</span></div><div style={{ position: "absolute", left: 50, right: 50, bottom: 130, textAlign: "center", color: "#fff", fontFamily: "Arial, sans-serif", fontWeight: 900, fontSize: 34, textShadow: "0 4px 12px #000" }}>TULIS PENDAPATMU DI KOMENTAR!</div></AbsoluteFill>;
 };
 
 export const Saranjana004: React.FC = () => (
