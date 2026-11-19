@@ -1,0 +1,24 @@
+name: Render Saranjana004 True 3D
+on:
+  push:
+    branches: [saranjana004-true-3d]
+  workflow_dispatch:
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Blender
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y blender ffmpeg
+      - name: Render true 3D animation
+        run: blender -b -t 2 --python scripts/saranjana004_true3d.py
+      - name: Upload MP4
+        uses: actions/upload-artifact@v4
+        with:
+          name: Saranjana004-TRUE-3D-MP4
+          path: /tmp/Saranjana004-3D.mp4
+          if-no-files-found: error
+          retention-days: 7
