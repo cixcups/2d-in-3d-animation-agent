@@ -7,10 +7,14 @@ import {
 } from "./videos/demo/Bridge";
 import { DemoCaptionOverlay } from "./videos/demo/DemoCaptionOverlay";
 import { DemoCaptionsOnly } from "./videos/demo/CaptionsOnly";
+import { Saranjana004 } from "./videos/saranjana/Saranjana004";
 
 export const Root: React.FC = () => {
   return (
     <>
+      <Folder name="Saranjana">
+        <Composition id="Saranjana004" component={Saranjana004} durationInFrames={1650} fps={30} width={1080} height={1920} />
+      </Folder>
       <Folder name="Demo">
         <Composition
           id="DemoShort"
