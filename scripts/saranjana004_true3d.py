@@ -7,8 +7,8 @@ bpy.ops.object.select_all(action='SELECT'); bpy.ops.object.delete(use_global=Fal
 for d in bpy.data.materials: bpy.data.materials.remove(d)
 scene=bpy.context.scene
 scene.render.engine='BLENDER_EEVEE_NEXT' if hasattr(bpy.types, 'BlenderEEVEEPreferences') else 'BLENDER_EEVEE'
-scene.render.resolution_x=720; scene.render.resolution_y=1280; scene.render.resolution_percentage=100
-scene.render.fps=24; scene.frame_start=1; scene.frame_end=1320
+scene.render.resolution_x=540; scene.render.resolution_y=960; scene.render.resolution_percentage=100
+scene.render.fps=24; scene.frame_start=1; scene.frame_end=1320; scene.frame_step=2
 scene.render.image_settings.file_format='PNG'
 scene.render.image_settings.color_mode='RGB'
 os.makedirs('/tmp/saranjana_frames', exist_ok=True)
@@ -114,12 +114,12 @@ def area(name,loc,power,color,size,target):
 area('Soft key',( -4,-6,8),1100,(.72,.84,1),6,(0,0,2))
 area('Warm rim',(4,2,6),1500,(1,.35,.12),5,(0,0,2))
 area('Front fill',(3,-5,3),450,(.25,.55,1),4,(0,0,2))
-scene.camera.data.dof.use_dof=True; scene.camera.data.dof.focus_object=root; scene.camera.data.dof.aperture_fstop=8
+scene.camera.data.dof.use_dof=False
 # Timeline: 6 story beats with animated character, camera push and changing city atmosphere.
 def key(obj, frame, loc=None, rot=None):
  if loc is not None: obj.location=loc; obj.keyframe_insert(data_path='location',frame=frame)
  if rot is not None: obj.rotation_euler=rot; obj.keyframe_insert(data_path='rotation_euler',frame=frame)
-for f in range(1,1321):
+for f in range(1,1321,12):
  scene.frame_set(f)
  t=f/24
  # gentle breathing/bobbing and walking cycle; pause at dramatic beats
@@ -143,6 +143,8 @@ scene.render.ffmpeg.audio_codec='AAC'
 scene.render.resolution_percentage=100
 available_engines={item.identifier for item in scene.render.bl_rna.properties['engine'].enum_items}
 scene.render.engine='BLENDER_EEVEE' if 'BLENDER_EEVEE' in available_engines else ('BLENDER_EEVEE_NEXT' if 'BLENDER_EEVEE_NEXT' in available_engines else 'CYCLES')
+if hasattr(scene, 'eevee') and hasattr(scene.eevee, 'taa_render_samples'):
+ scene.eevee.taa_render_samples=8
 scene.render.image_settings.file_format='PNG'
 scene.render.filepath='/tmp/saranjana_frames/frame_'
 scene.frame_set(1)
