@@ -48,7 +48,7 @@ function Backdrop({ frame = 0, cityOpacity = 0.9, purple = false, fog = false, w
 }) {
   const fogShift = (frame * 1.8) % 600;
   return (
-    <svg viewBox={`0 0 ${W} ${H}`} width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
+    <svg viewBox={`0 0 ${W} ${H}`} width="100%" height="100%" preserveAspectRatio="xMidYMid slice" style={{ transform: `scale(${1 + 0.012 * Math.sin(frame * 0.025)}) translateX(${Math.sin(frame * 0.018) * 8}px)`, transformOrigin: "50% 50%" }}>
       <defs>
         <linearGradient id="nightSky" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0" stopColor={purple ? "#160b36" : "#07142e"} />
@@ -65,7 +65,9 @@ function Backdrop({ frame = 0, cityOpacity = 0.9, purple = false, fog = false, w
       <path d="M0 1040 L180 780 L320 1010 L470 710 L660 1030 L810 820 L1080 1020 V1600 H0Z" fill="#102344" />
       <path d="M0 1190 L180 950 L330 1150 L520 900 L710 1190 L890 940 L1080 1160 V1650 H0Z" fill="#0c1c36" opacity="0.96" />
       <ellipse cx="740" cy="1290" rx="580" ry="520" fill="url(#cityGlow)" />
-      <Skyline opacity={cityOpacity} frame={frame} wide={wide} />
+      <g transform={`translate(${Math.sin(frame * 0.018) * -14} 0)`}>
+        <Skyline opacity={cityOpacity} frame={frame} wide={wide} />
+      </g>
       {/* forest silhouettes */}
       <g fill="#071a21" stroke="#0a231f" strokeWidth="22" strokeLinejoin="round">
         <path d="M0 1510 L0 380 L85 520 L25 520 L130 680 L52 680 L180 900 L0 900Z" />
@@ -135,14 +137,14 @@ function BangStick({ x, y, scale = 1, mood = "curious", frame = 0, walking = fal
 
 function Caption({ children, top = false }: { children: React.ReactNode; top?: boolean }) {
   return (
-    <div style={{ position: "absolute", left: 56, right: 56, [top ? "top" : "bottom"]: top ? 105 : 112, textAlign: "center", color: "white", fontFamily: "Arial, sans-serif", fontSize: 54, fontWeight: 900, lineHeight: 1.15, letterSpacing: -1, WebkitTextStroke: "2px #07101e", textShadow: "0 5px 0 #000, 0 10px 24px #000", padding: "22px 24px", background: "rgba(2, 8, 20, .38)", borderRadius: 26 }}>
+    <div style={{ position: "absolute", left: 56, right: 56, [top ? "top" : "bottom"]: top ? 105 : 112, textAlign: "center", color: "white", fontFamily: "Arial, sans-serif", fontSize: 40, fontWeight: 900, lineHeight: 1.15, letterSpacing: -1, WebkitTextStroke: "2px #07101e", textShadow: "0 5px 0 #000, 0 10px 24px #000", padding: "22px 24px", background: "rgba(2, 8, 20, .38)", borderRadius: 26 }}>
       {children}
     </div>
   );
 }
 
 const Title: React.FC<{ children: React.ReactNode; top?: number }> = ({ children, top = 340 }) => (
-  <div style={{ position: "absolute", top, left: 48, right: 48, textAlign: "center", fontFamily: "Arial Black, Arial, sans-serif", fontWeight: 1000, fontSize: 82, color: "#ffe14b", lineHeight: 1.02, WebkitTextStroke: "4px #140b20", textShadow: "0 8px 0 #ad231d, 0 13px 22px #000" }}>{children}</div>
+  <div style={{ position: "absolute", top, left: 48, right: 48, textAlign: "center", fontFamily: "Arial Black, Arial, sans-serif", fontWeight: 1000, fontSize: 66, color: "#ffe14b", lineHeight: 1.02, WebkitTextStroke: "4px #140b20", textShadow: "0 8px 0 #ad231d, 0 13px 22px #000" }}>{children}</div>
 );
 
 const SceneOne: React.FC = () => {
@@ -160,7 +162,7 @@ const SceneTwo: React.FC = () => {
 const SceneThree: React.FC = () => {
   const f = useCurrentFrame();
   const glow = 0.5 + 0.3 * Math.sin(f * 0.11);
-  return <AbsoluteFill><Backdrop frame={f} cityOpacity={1} wide /><div style={{ position: "absolute", top: 680, left: 0, right: 0, textAlign: "center", color: "#9cf3ff", fontFamily: "Arial Black, Arial", fontSize: 48, fontWeight: 900, textShadow: `0 0 24px rgba(50,220,255,${glow})` }}>GEDUNG MEGAH • JALANAN LUAS</div><BangStick x={350} y={1530} scale={0.95} mood="curious" frame={f} /><Caption>Menurut cerita masyarakat, kota ini punya bangunan megah dan teknologi maju.</Caption></AbsoluteFill>;
+  return <AbsoluteFill><Backdrop frame={f} cityOpacity={1} wide /><div style={{ position: "absolute", top: 680, left: 0, right: 0, textAlign: "center", color: "#9cf3ff", fontFamily: "Arial Black, Arial", fontSize: 36, fontWeight: 900, textShadow: `0 0 24px rgba(50,220,255,${glow})` }}>GEDUNG MEGAH • JALANAN LUAS</div><BangStick x={350} y={1530} scale={0.95} mood="curious" frame={f} /><Caption>Menurut cerita masyarakat, kota ini punya bangunan megah dan teknologi maju.</Caption></AbsoluteFill>;
 };
 
 const SceneFour: React.FC = () => {
@@ -178,7 +180,7 @@ const SceneFive: React.FC = () => {
 const SceneSix: React.FC = () => {
   const f = useCurrentFrame();
   const pulse = 1 + 0.025 * Math.sin(f * 0.18);
-  return <AbsoluteFill><Backdrop frame={f} cityOpacity={0.22} purple fog /><BangStick x={285} y={1500} scale={1.16 * pulse} mood="determined" frame={f} /><div style={{ position: "absolute", left: 510, right: 38, top: 660, textAlign: "center", fontFamily: "Arial Black, Arial", fontWeight: 1000, fontSize: 98, lineHeight: 1.03, color: "#fff", WebkitTextStroke: "4px #120a24", textShadow: "0 8px 0 #000" }}>MISTIS<br/><span style={{ color: "#ffd83f" }}>ATAU</span><br/><span style={{ color: "#ffdd39" }}>SAINS?</span></div><div style={{ position: "absolute", left: 50, right: 50, bottom: 130, textAlign: "center", color: "#fff", fontFamily: "Arial, sans-serif", fontWeight: 900, fontSize: 42, textShadow: "0 4px 12px #000" }}>TULIS PENDAPATMU DI KOMENTAR!</div></AbsoluteFill>;
+  return <AbsoluteFill><Backdrop frame={f} cityOpacity={0.22} purple fog /><BangStick x={285} y={1500} scale={1.16 * pulse} mood="determined" frame={f} /><div style={{ position: "absolute", left: 510, right: 38, top: 660, textAlign: "center", fontFamily: "Arial Black, Arial", fontWeight: 1000, fontSize: 76, lineHeight: 1.03, color: "#fff", WebkitTextStroke: "4px #120a24", textShadow: "0 8px 0 #000" }}>MISTIS<br/><span style={{ color: "#ffd83f" }}>ATAU</span><br/><span style={{ color: "#ffdd39" }}>SAINS?</span></div><div style={{ position: "absolute", left: 50, right: 50, bottom: 130, textAlign: "center", color: "#fff", fontFamily: "Arial, sans-serif", fontWeight: 900, fontSize: 34, textShadow: "0 4px 12px #000" }}>TULIS PENDAPATMU DI KOMENTAR!</div></AbsoluteFill>;
 };
 
 export const Saranjana004: React.FC = () => (
