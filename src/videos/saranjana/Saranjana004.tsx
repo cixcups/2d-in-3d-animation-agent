@@ -174,7 +174,7 @@ const SceneFour: React.FC = () => {
 const SceneFive: React.FC = () => {
   const f = useCurrentFrame();
   const opacity = interpolate(f, [0, 230, 330], [0.82, 0.45, 0.08], clamp);
-  return <AbsoluteFill><Backdrop frame={f} cityOpacity={opacity} fog wide /><BangStick x={310} y={1535} scale={1.06} mood="shock" frame={f} /><Title top={300}>TIBA-TIBA<br/>MENGHILANG!</Title><Caption>Tapi... apakah kota itu benar-benar ada, atau hanya legenda?</Caption></AbsoluteFill>;
+  return <AbsoluteFill><Backdrop frame={f} cityOpacity={opacity} fog wide /><BangStick x={310} y={1370} scale={1.06} mood="shock" frame={f} /><Title top={300}>TIBA-TIBA<br/>MENGHILANG!</Title><Caption>Tapi... apakah kota itu benar-benar ada, atau hanya legenda?</Caption></AbsoluteFill>;
 };
 
 const SceneSix: React.FC = () => {
