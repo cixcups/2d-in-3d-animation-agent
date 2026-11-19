@@ -1,4 +1,4 @@
-import bpy, math
+import bpy, math, os
 from mathutils import Vector
 from math import sin, cos, pi
 
@@ -9,9 +9,10 @@ scene=bpy.context.scene
 scene.render.engine='BLENDER_EEVEE_NEXT' if hasattr(bpy.types, 'BlenderEEVEEPreferences') else 'BLENDER_EEVEE'
 scene.render.resolution_x=720; scene.render.resolution_y=1280; scene.render.resolution_percentage=100
 scene.render.fps=24; scene.frame_start=1; scene.frame_end=1320
-scene.render.image_settings.file_format='FFMPEG'
-scene.render.ffmpeg.format='MPEG4'; scene.render.ffmpeg.codec='H264'; scene.render.ffmpeg.constant_rate_factor='MEDIUM'
-scene.render.filepath='/tmp/Saranjana004-3D.mp4'
+scene.render.image_settings.file_format='PNG'
+scene.render.image_settings.color_mode='RGB'
+os.makedirs('/tmp/saranjana_frames', exist_ok=True)
+scene.render.filepath='/tmp/saranjana_frames/frame_'
 scene.render.image_settings.color_mode='RGB'
 scene.world.color=(0.018,0.025,0.055)
 scene.view_settings.view_transform='Standard'
@@ -141,6 +142,7 @@ scene.render.image_settings.color_mode='RGB'
 scene.render.ffmpeg.audio_codec='AAC'
 scene.render.resolution_percentage=100
 scene.render.engine='BLENDER_EEVEE_NEXT' if bpy.app.version >= (4,2,0) else 'BLENDER_EEVEE'
-scene.render.filepath='/tmp/Saranjana004-3D.mp4'
+scene.render.image_settings.file_format='PNG'
+scene.render.filepath='/tmp/saranjana_frames/frame_'
 scene.frame_set(1)
 bpy.ops.render.render(animation=True)
