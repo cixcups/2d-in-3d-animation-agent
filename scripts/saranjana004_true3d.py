@@ -131,6 +131,12 @@ for f in range(1,1321,12):
   fore.rotation_euler[1]=walk*.09*side
   thigh.rotation_euler[1]=walk*.23*side
   shoe.rotation_euler[1]=walk*.18*side
+  arm.keyframe_insert(data_path='rotation_euler',frame=f)
+  fore.keyframe_insert(data_path='rotation_euler',frame=f)
+  thigh.keyframe_insert(data_path='rotation_euler',frame=f)
+  shoe.keyframe_insert(data_path='rotation_euler',frame=f)
+ root.keyframe_insert(data_path='location',frame=f)
+ root.keyframe_insert(data_path='rotation_euler',frame=f)
  # camera slowly pushes in across story
  cam.data.ortho_scale=8.8-.8*(f/1320)
  cam.data.keyframe_insert(data_path='ortho_scale',frame=f)
