@@ -15,6 +15,10 @@ jobs:
           sudo apt-get install -y blender ffmpeg
       - name: Render true 3D animation
         run: blender -b -t 2 --python scripts/saranjana004_true3d.py
+      - name: Encode PNG frames to MP4
+        run: |
+          ffmpeg -y -framerate 24 -i /tmp/saranjana_frames/frame_%04d.png -c:v libx264 -preset medium -crf 20 -pix_fmt yuv420p -movflags +faststart /tmp/Saranjana004-3D.mp4
+          test -s /tmp/Saranjana004-3D.mp4
       - name: Upload MP4
         uses: actions/upload-artifact@v4
         with:
