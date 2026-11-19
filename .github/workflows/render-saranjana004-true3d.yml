@@ -3,6 +3,9 @@ on:
   push:
     branches: [saranjana004-true-3d]
   workflow_dispatch:
+concurrency:
+  group: saranjana004-true-3d-render
+  cancel-in-progress: true
 jobs:
   render:
     runs-on: ubuntu-latest
