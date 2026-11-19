@@ -6,18 +6,18 @@ on:
 jobs:
   render:
     runs-on: ubuntu-latest
-    timeout-minutes: 360
+    timeout-minutes: 180
     steps:
       - uses: actions/checkout@v4
       - name: Install Blender
         run: |
           sudo apt-get update
-          sudo apt-get install -y blender ffmpeg libegl1 libgl1
+          sudo apt-get install -y --no-install-recommends blender ffmpeg libegl1 libgl1
       - name: Render true 3D animation
         run: blender -b -t 2 --python scripts/saranjana004_true3d.py
       - name: Encode PNG frames to MP4
         run: |
-          ffmpeg -y -framerate 24 -i /tmp/saranjana_frames/frame_%04d.png -c:v libx264 -preset medium -crf 20 -pix_fmt yuv420p -movflags +faststart /tmp/Saranjana004-3D.mp4
+          ffmpeg -y -framerate 12 -pattern_type glob -i '/tmp/saranjana_frames/frame_*.png' -vf fps=24 -c:v libx264 -preset ultrafast -crf 23 -pix_fmt yuv420p -movflags +faststart /tmp/Saranjana004-3D.mp4
           test -s /tmp/Saranjana004-3D.mp4
       - name: Upload MP4
         uses: actions/upload-artifact@v4
