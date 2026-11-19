@@ -141,7 +141,8 @@ for fr,loc,target in [(1,(0,-13,5.3),(0,0,2)),(240,(-.8,-12,5),(0,1,2)),(480,(1.
 scene.render.image_settings.color_mode='RGB'
 scene.render.ffmpeg.audio_codec='AAC'
 scene.render.resolution_percentage=100
-scene.render.engine='BLENDER_EEVEE_NEXT' if bpy.app.version >= (4,2,0) else 'BLENDER_EEVEE'
+available_engines={item.identifier for item in scene.render.bl_rna.properties['engine'].enum_items}
+scene.render.engine='BLENDER_EEVEE' if 'BLENDER_EEVEE' in available_engines else ('BLENDER_EEVEE_NEXT' if 'BLENDER_EEVEE_NEXT' in available_engines else 'CYCLES')
 scene.render.image_settings.file_format='PNG'
 scene.render.filepath='/tmp/saranjana_frames/frame_'
 scene.frame_set(1)
