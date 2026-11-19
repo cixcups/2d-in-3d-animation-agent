@@ -92,9 +92,11 @@ function BangStick({ x, y, scale = 1, mood = "curious", frame = 0, walking = fal
 }) {
   const step = walking ? Math.sin(frame * 0.24) * 26 : Math.sin(frame * 0.06) * 3;
   const bob = walking ? Math.abs(Math.sin(frame * 0.24)) * -13 : Math.sin(frame * 0.09) * 5;
-  const leftArm = mood === "shock" ? "M-5 -145 Q-130 -250 -165 -200" : mood === "point" ? "M-5 -145 Q105 -210 185 -205" : mood === "happy" ? "M-5 -145 Q-140 -255 -150 -300" : "M-5 -145 Q-125 -100 -145 -35";
-  const rightArm = mood === "shock" ? "M5 -145 Q130 -250 165 -200" : mood === "point" ? "M5 -145 Q115 -110 150 -35" : mood === "happy" ? "M5 -145 Q140 -255 150 -300" : "M5 -145 Q115 -100 145 -35";
+  const walkSwing = walking ? Math.sin(frame * 0.24) : 0;
+  const leftArm = walking ? `M-5 -145 Q${-125 - walkSwing * 48} ${-105 + walkSwing * 52} ${-145 - walkSwing * 28} ${-35 + walkSwing * 18}` : mood === "shock" ? "M-5 -145 Q-130 -250 -165 -200" : mood === "point" ? "M-5 -145 Q105 -210 185 -205" : mood === "happy" ? "M-5 -145 Q-140 -255 -150 -300" : "M-5 -145 Q-125 -100 -145 -35";
+  const rightArm = walking ? `M5 -145 Q${125 + walkSwing * 48} ${-105 - walkSwing * 52} ${145 + walkSwing * 28} ${-35 - walkSwing * 18}` : mood === "shock" ? "M5 -145 Q130 -250 165 -200" : mood === "point" ? "M5 -145 Q115 -110 150 -35" : mood === "happy" ? "M5 -145 Q140 -255 150 -300" : "M5 -145 Q115 -100 145 -35";
   return (
+    <svg viewBox={`0 0 ${W} ${H}`} width="100%" height="100%" style={{ position: "absolute", inset: 0, overflow: "visible", pointerEvents: "none" }} aria-hidden="true">
     <g transform={`translate(${x} ${y + bob}) scale(${scale})`} stroke="#05070d" strokeWidth="22" strokeLinecap="round" strokeLinejoin="round">
       {/* legs and oversized white shoes */}
       <path d={`M-10 135 L-75 ${315 + step}`} fill="none" />
@@ -127,6 +129,7 @@ function BangStick({ x, y, scale = 1, mood = "curious", frame = 0, walking = fal
       {/* motion ticks on walking */}
       {walking ? <g stroke="#fff" strokeWidth="9" opacity="0.8"><path d="M-190 70 h-45 M185 105 h45"/><path d="M-190 125 h-35"/></g> : null}
     </g>
+    </svg>
   );
 }
 
