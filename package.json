@@ -10,7 +10,8 @@
     "render:audio": "python scripts/gen-audio.py",
     "render:video": "node scripts/render-video.mjs",
     "render:captions": "node scripts/render-captions.mjs",
-    "build": "remotion bundle src/index.ts"
+    "build": "remotion bundle src/index.ts",
+    "render:saranjana004": "node scripts/render-saranjana004.mjs"
   },
   "keywords": [
     "remotion",
