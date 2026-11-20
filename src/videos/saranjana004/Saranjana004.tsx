@@ -76,6 +76,17 @@ function Backdrop({ frame = 0, cityOpacity = 0.9, purple = false, fog = false, w
       {stars.map(([x, y, r], i) => <circle key={i} cx={x} cy={y} r={r} fill="#fff" opacity={0.55 + 0.35 * Math.sin(frame * 0.04 + i)} />)}
       <circle cx="820" cy="280" r="112" fill="#e4eeff" opacity="0.9" />
       <circle cx="855" cy="250" r="112" fill="#15294b" opacity="0.28" />
+      <g fill="#b9c9e4" opacity="0.48">
+        <circle cx="785" cy="246" r="19"/><circle cx="843" cy="218" r="13"/>
+        <circle cx="850" cy="302" r="24"/><circle cx="793" cy="326" r="12"/>
+        <circle cx="884" cy="270" r="10"/>
+      </g>
+      <g fill="none" stroke="#b7d2f4" strokeWidth="8" opacity="0.24">
+        <path d="M-40 570 Q130 500 290 560 T620 550"/>
+        <path d="M610 470 Q790 410 970 470 T1160 450"/>
+        <path d="M-100 700 Q100 625 270 690 T600 675"/>
+        <path d="M560 760 Q760 685 940 750 T1200 730"/>
+      </g>
       <path d="M0 1040 L180 780 L320 1010 L470 710 L660 1030 L810 820 L1080 1020 V1600 H0Z" fill="#102344" />
       <path d="M0 1190 L180 950 L330 1150 L520 900 L710 1190 L890 940 L1080 1160 V1650 H0Z" fill="#0c1c36" opacity="0.96" />
       <ellipse cx="740" cy="1290" rx="580" ry="520" fill="url(#cityGlow)" />
@@ -85,6 +96,21 @@ function Backdrop({ frame = 0, cityOpacity = 0.9, purple = false, fog = false, w
         <path d="M1080 1500 L1080 470 L995 620 L1055 620 L930 800 L1010 800 L890 1010 L1080 1010Z" />
         <path d="M-80 970 Q70 760 220 945 Q130 990 90 1080 Q-10 1060 -80 970Z" />
         <path d="M1160 1030 Q1000 780 850 960 Q940 1030 970 1120 Q1080 1110 1160 1030Z" />
+
+      {/* Overhanging forest canopy, branches and leaf clusters frame the city vista. */}
+      <g fill="none" stroke="#07150f" strokeWidth="34" strokeLinecap="round">
+        <path d="M-35 0 Q85 150 165 265 Q220 330 300 365"/>
+        <path d="M35 95 Q130 105 215 175 M115 190 Q190 190 250 245"/>
+        <path d="M1110 10 Q1010 135 930 230 Q880 290 805 330"/>
+        <path d="M1040 115 Q960 105 890 175 M965 205 Q900 210 850 265"/>
+      </g>
+      <g fill="#1b5836" stroke="#0a281d" strokeWidth="9">
+        <ellipse cx="30" cy="42" rx="70" ry="38"/><ellipse cx="110" cy="80" rx="76" ry="42"/>
+        <ellipse cx="205" cy="150" rx="65" ry="37"/><ellipse cx="285" cy="205" rx="70" ry="40"/>
+        <ellipse cx="1060" cy="45" rx="72" ry="40"/><ellipse cx="970" cy="95" rx="76" ry="42"/>
+        <ellipse cx="890" cy="165" rx="68" ry="38"/><ellipse cx="810" cy="220" rx="72" ry="40"/>
+        <ellipse cx="45" cy="175" rx="58" ry="34"/><ellipse cx="1015" cy="235" rx="62" ry="36"/>
+      </g>
       </g>
       <path d="M0 1690 Q240 1580 470 1690 Q720 1570 1080 1680 V1920 H0Z" fill="#071620" />
       <path d="M0 1760 Q260 1670 520 1770 Q810 1650 1080 1750" fill="none" stroke="#214b39" strokeWidth="18" />
