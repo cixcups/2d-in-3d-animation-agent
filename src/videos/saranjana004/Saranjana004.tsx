@@ -162,30 +162,33 @@ function BangStick({ x, y, scale = 1, mood = "curious", frame = 0, walking = fal
         {/* Compact black torso, matching the official slim silhouette. */}
         <g transform={`rotate(${bodyLean} 0 -5)`}>
           <path d="M-34 -172 Q-48 -115 -31 -55 L-25 145 Q0 162 25 145 L31 -55 Q48 -115 34 -172Z" fill="#05070d" stroke="#05070d" strokeWidth="8"/>
-          {/* Arms with shoulder and elbow bends. */}
-          <g stroke="#05070d" strokeWidth="24" strokeLinecap="round" strokeLinejoin="round" fill="none">
-            <g transform={`rotate(${leftArm} -22 -145)`}>
-              <path d="M-22 -145 Q-82 -116 -116 -68 Q-133 -42 -145 -15"/>
-            </g>
-            <g transform={`rotate(${rightArm} 22 -145)`}>
-              <path d="M22 -145 Q82 -116 116 -68 Q133 -42 145 -15"/>
-            </g>
-          </g>
-          {/* Puffy white gloves, each with a thumb and three visible knuckles. */}
-          <g fill="url(#bangGloveShade)" stroke="#111522" strokeWidth="8" strokeLinejoin="round">
-            <g transform={`translate(-150 ${handY}) rotate(-12)`}>
-              <path d="M-38 8 Q-50 -18 -30 -34 Q-10 -48 7 -32 Q26 -45 42 -24 Q58 -4 40 19 Q25 42 -8 40 Q-38 36 -38 8Z"/>
-              <path d="M-27 -26 Q-44 -52 -27 -63 Q-10 -70 0 -42" />
-              <path d="M-3 -34 Q-8 -63 10 -66 Q28 -64 24 -34" />
-              <path d="M20 -28 Q25 -52 42 -47 Q57 -39 39 -12" />
-            </g>
-            <g transform={`translate(150 ${handY}) rotate(12)`}>
-              <path d="M-38 8 Q-50 -18 -30 -34 Q-10 -48 7 -32 Q26 -45 42 -24 Q58 -4 40 19 Q25 42 -8 40 Q-38 36 -38 8Z"/>
-              <path d="M-27 -26 Q-44 -52 -27 -63 Q-10 -70 0 -42" />
-              <path d="M-3 -34 Q-8 -63 10 -66 Q28 -64 24 -34" />
-              <path d="M20 -28 Q25 -52 42 -47 Q57 -39 39 -12" />
-            </g>
-          </g>
+          {/* Arms and gloves share the same shoulder pivots: hands follow every gesture. */}
+          {(() => {
+            const leftEndY = mood === "shock" ? -205 : mood === "happy" ? -250 : -15;
+            const rightEndY = mood === "shock" ? -205 : mood === "happy" ? -250 : mood === "point" ? -125 : -15;
+            const leftEndX = mood === "happy" ? -132 : mood === "shock" ? -122 : -145;
+            const rightEndX = mood === "happy" ? 132 : mood === "shock" ? 122 : mood === "point" ? 155 : 145;
+            const glove = (flip: number) => (
+              <g transform={`scale(${flip} 1)`} fill="url(#bangGloveShade)" stroke="#111522" strokeWidth="8" strokeLinejoin="round">
+                <path d="M-38 8 Q-50 -18 -30 -34 Q-10 -48 7 -32 Q26 -45 42 -24 Q58 -4 40 19 Q25 42 -8 40 Q-38 36 -38 8Z"/>
+                <path d="M-27 -26 Q-44 -52 -27 -63 Q-10 -70 0 -42"/>
+                <path d="M-3 -34 Q-8 -63 10 -66 Q28 -64 24 -34"/>
+                <path d="M20 -28 Q25 -52 42 -47 Q57 -39 39 -12"/>
+              </g>
+            );
+            return (
+              <g stroke="#05070d" strokeWidth="24" strokeLinecap="round" strokeLinejoin="round" fill="none">
+                <g transform={`rotate(${leftArm} -22 -145)`}>
+                  <path d={`M-22 -145 Q-82 -116 -116 ${leftEndY + 55} L${leftEndX} ${leftEndY}`}/>
+                  <g transform={`translate(${leftEndX} ${leftEndY}) rotate(-12)`}>{glove(1)}</g>
+                </g>
+                <g transform={`rotate(${rightArm} 22 -145)`}>
+                  <path d={`M22 -145 Q82 -116 116 ${rightEndY + 55} L${rightEndX} ${rightEndY}`}/>
+                  <g transform={`translate(${rightEndX} ${rightEndY}) rotate(12)`}>{glove(-1)}</g>
+                </g>
+              </g>
+            );
+          })()}
           {/* Large round head and the two unmistakable black tufts. */}
           <g transform={`rotate(${headTilt} 0 -300)`}>
             <ellipse cx="0" cy="-300" rx="134" ry="134" fill="url(#bangHeadShade)" stroke="#05070d" strokeWidth="13"/>
