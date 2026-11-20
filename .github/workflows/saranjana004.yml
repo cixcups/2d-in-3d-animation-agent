@@ -36,6 +36,12 @@ jobs:
       - name: Install project dependencies
         run: npm install
 
+      - name: Generate Indonesian narration
+        run: |
+          mkdir -p public
+          espeak-ng -v id -s 118 -p 42 -a 165 -w /tmp/saranjana-voice.wav "Bayangkan... di Indonesia katanya ada sebuah kota yang lebih modern dari Jakarta! Namanya... Saranjana! Konon, kota ini berada di Kalimantan Selatan, tepatnya di wilayah Pulau Laut. Menurut cerita masyarakat, Saranjana memiliki gedung-gedung megah, jalanan luas, bahkan teknologi yang sangat maju! Anehnya, kota ini tidak pernah ditemukan seperti kota pada umumnya. Bahkan, ada cerita tentang orang-orang yang mengaku pernah melihat kota misterius ini! Tapi... apakah Saranjana benar-benar ada? Atau semuanya hanyalah legenda yang diwariskan turun-temurun? Menurut kalian... mistis atau sains?"
+          ffmpeg -y -i /tmp/saranjana-voice.wav -af "atempo=0.90,apad=pad_dur=55" -t 55 -ar 48000 -ac 2 public/saranjana004-narration.wav
+
       - name: Build Remotion bundle
         run: npm run build
 
