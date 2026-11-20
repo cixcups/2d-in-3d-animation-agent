@@ -123,8 +123,9 @@ function BangStick({ x, y, scale = 1, mood = "curious", frame = 0, walking = fal
   const headTilt = mood === "shock" ? -5 : mood === "determined" ? 5 : walking ? Math.sin(gait) * 3 : 0;
   const leftLeg = walking ? stride * 25 : 0;
   const rightLeg = walking ? -stride * 25 : 0;
-  const leftArm = walking ? -stride * 30 : mood === "shock" ? -34 : mood === "happy" ? -54 : mood === "point" ? 8 : 0;
-  const rightArm = walking ? stride * 30 : mood === "shock" ? 34 : mood === "happy" ? 54 : mood === "point" ? -42 : 0;
+  const idleSwing = Math.sin(frame * 0.105) * 7;
+  const leftArm = walking ? -stride * 30 : mood === "shock" ? -34 : mood === "happy" ? -54 : mood === "point" ? 8 : idleSwing;
+  const rightArm = walking ? stride * 30 : mood === "shock" ? 34 : mood === "happy" ? 54 : mood === "point" ? -42 : -idleSwing;
   const blink = !walking && (frame % 137 < 5);
   const mouth = mood === "shock" ? "M-25 -248 Q0 -285 25 -248 Q28 -207 0 -205 Q-28 -207 -25 -248Z"
     : mood === "happy" ? "M-47 -250 Q0 -184 47 -250 Q38 -190 0 -188 Q-38 -190 -47 -250Z"
@@ -224,7 +225,7 @@ const Title: React.FC<{ children: React.ReactNode; top?: number }> = ({ children
 const SceneOne: React.FC = () => {
   const f = useCurrentFrame();
   const x = interpolate(f, [0, 180], [250, 345], clamp);
-  return <AbsoluteFill><Backdrop frame={f} cityOpacity={0.92} /><BangStick x={x} y={1510} scale={1.08} mood="shock" frame={f} /><Title top={310}>KOTA MISTERIUS?</Title><Caption>Bayangkan... ada kota yang katanya lebih modern dari Jakarta!</Caption></AbsoluteFill>;
+  return <AbsoluteFill><Backdrop frame={f} cityOpacity={0.92} /><BangStick x={x} y={1510} scale={1.08} mood="shock" frame={f} walking /><Title top={310}>KOTA MISTERIUS?</Title><Caption>Bayangkan... ada kota yang katanya lebih modern dari Jakarta!</Caption></AbsoluteFill>;
 };
 
 const SceneTwo: React.FC = () => {
