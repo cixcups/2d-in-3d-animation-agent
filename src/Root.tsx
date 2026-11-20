@@ -12,7 +12,7 @@ import { Saranjana004 } from "./videos/saranjana004/Saranjana004";
 export const Root: React.FC = () => {
   return (
     <>
-      <Folder name="Bang Stick — Saranjana 004">
+      <Folder name="Bang-Stick-Saranjana-004">
         <Composition id="Saranjana004" component={Saranjana004} durationInFrames={1650} fps={30} width={1080} height={1920} />
       </Folder>
       <Folder name="Demo">
