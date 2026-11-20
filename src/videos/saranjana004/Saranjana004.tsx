@@ -1,5 +1,5 @@
 import React from "react";
-import { AbsoluteFill, Audio, Sequence, interpolate, staticFile, useCurrentFrame } from "remotion";
+import { AbsoluteFill, Sequence, interpolate, useCurrentFrame } from "remotion";
 
 const W = 1080;
 const H = 1920;
@@ -220,6 +220,5 @@ export const Saranjana004: React.FC = () => (
     <Sequence from={750} durationInFrames={360}><SceneFour /></Sequence>
     <Sequence from={1110} durationInFrames={330}><SceneFive /></Sequence>
     <Sequence from={1440} durationInFrames={210}><SceneSix /></Sequence>
-    <Audio src={staticFile("saranjana004-narration.wav")} volume={0.95} />
   </AbsoluteFill>
 );
