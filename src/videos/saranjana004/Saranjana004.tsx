@@ -131,7 +131,7 @@ function BangStick({ x, y, scale = 1, mood = "curious", frame = 0, walking = fal
     : mood === "determined" ? "M-35 -222 Q0 -210 35 -222" : "M-31 -230 Q0 -207 31 -230";
   const handY = mood === "shock" ? -205 : mood === "happy" ? -305 : mood === "point" ? -175 : -28;
   return (
-    <svg viewBox={\`0 0 \${W} \${H}\`} width="100%" height="100%" style={{ position: "absolute", inset: 0, overflow: "visible" }} preserveAspectRatio="xMidYMid meet">
+    <svg viewBox={`0 0 ${W} ${H}`} width="100%" height="100%" style={{ position: "absolute", inset: 0, overflow: "visible" }} preserveAspectRatio="xMidYMid meet">
       <defs>
         <radialGradient id="bangHeadShade" cx="34%" cy="24%" r="78%">
           <stop offset="0" stopColor="#ffffff"/><stop offset="0.68" stopColor="#fff"/><stop offset="1" stopColor="#c9cde0"/>
@@ -143,42 +143,42 @@ function BangStick({ x, y, scale = 1, mood = "curious", frame = 0, walking = fal
           <stop offset="0" stopColor="#fff"/><stop offset="1" stopColor="#d7dbea"/>
         </linearGradient>
       </defs>
-      <g transform={\`translate(\${x} \${y + bob}) scale(\${scale})\`}>
+      <g transform={`translate(${x} ${y + bob}) scale(${scale})`}>
         <ellipse cx="0" cy="435" rx="190" ry="24" fill="#020711" opacity="0.42"/>
         {/* Legs articulate from the hips; opposite swing creates a readable walk cycle. */}
         <g stroke="#05070d" strokeWidth="25" strokeLinecap="round" strokeLinejoin="round">
-          <g transform={\`rotate(\${leftLeg} -18 120)\`}>
+          <g transform={`rotate(${leftLeg} -18 120)`}>
             <path d="M-18 120 Q-48 214 -88 320" fill="none"/>
             <path d="M-91 315 Q-160 326 -169 390 Q-170 424 -130 429 H-30 Q2 418 -14 385 L-54 328Z" fill="url(#bangShoeShade)"/>
             <path d="M-160 397 Q-98 425 -22 402" fill="none" stroke="#aab1c2" strokeWidth="7"/>
           </g>
-          <g transform={\`rotate(\${rightLeg} 18 120)\`}>
+          <g transform={`rotate(${rightLeg} 18 120)`}>
             <path d="M18 120 Q48 214 88 320" fill="none"/>
             <path d="M91 315 Q160 326 169 390 Q170 424 130 429 H30 Q-2 418 14 385 L54 328Z" fill="url(#bangShoeShade)"/>
             <path d="M22 402 Q98 425 160 397" fill="none" stroke="#aab1c2" strokeWidth="7"/>
           </g>
         </g>
         {/* Compact black torso, matching the official slim silhouette. */}
-        <g transform={\`rotate(\${bodyLean} 0 -5)\`}>
+        <g transform={`rotate(${bodyLean} 0 -5)`}>
           <path d="M-34 -172 Q-48 -115 -31 -55 L-25 145 Q0 162 25 145 L31 -55 Q48 -115 34 -172Z" fill="#05070d" stroke="#05070d" strokeWidth="8"/>
           {/* Arms with shoulder and elbow bends. */}
           <g stroke="#05070d" strokeWidth="24" strokeLinecap="round" strokeLinejoin="round" fill="none">
-            <g transform={\`rotate(\${leftArm} -22 -145)\`}>
+            <g transform={`rotate(${leftArm} -22 -145)`}>
               <path d="M-22 -145 Q-82 -116 -116 -68 Q-133 -42 -145 -15"/>
             </g>
-            <g transform={\`rotate(\${rightArm} 22 -145)\`}>
+            <g transform={`rotate(${rightArm} 22 -145)`}>
               <path d="M22 -145 Q82 -116 116 -68 Q133 -42 145 -15"/>
             </g>
           </g>
           {/* Puffy white gloves, each with a thumb and three visible knuckles. */}
           <g fill="url(#bangGloveShade)" stroke="#111522" strokeWidth="8" strokeLinejoin="round">
-            <g transform={\`translate(-150 \${handY}) rotate(-12)\`}>
+            <g transform={`translate(-150 ${handY}) rotate(-12)`}>
               <path d="M-38 8 Q-50 -18 -30 -34 Q-10 -48 7 -32 Q26 -45 42 -24 Q58 -4 40 19 Q25 42 -8 40 Q-38 36 -38 8Z"/>
               <path d="M-27 -26 Q-44 -52 -27 -63 Q-10 -70 0 -42" />
               <path d="M-3 -34 Q-8 -63 10 -66 Q28 -64 24 -34" />
               <path d="M20 -28 Q25 -52 42 -47 Q57 -39 39 -12" />
             </g>
-            <g transform={\`translate(150 \${handY}) rotate(12)\`}>
+            <g transform={`translate(150 ${handY}) rotate(12)`}>
               <path d="M-38 8 Q-50 -18 -30 -34 Q-10 -48 7 -32 Q26 -45 42 -24 Q58 -4 40 19 Q25 42 -8 40 Q-38 36 -38 8Z"/>
               <path d="M-27 -26 Q-44 -52 -27 -63 Q-10 -70 0 -42" />
               <path d="M-3 -34 Q-8 -63 10 -66 Q28 -64 24 -34" />
@@ -186,7 +186,7 @@ function BangStick({ x, y, scale = 1, mood = "curious", frame = 0, walking = fal
             </g>
           </g>
           {/* Large round head and the two unmistakable black tufts. */}
-          <g transform={\`rotate(\${headTilt} 0 -300)\`}>
+          <g transform={`rotate(${headTilt} 0 -300)`}>
             <ellipse cx="0" cy="-300" rx="134" ry="134" fill="url(#bangHeadShade)" stroke="#05070d" strokeWidth="13"/>
             <path d="M-55 -425 Q-112 -505 -43 -516 Q-10 -516 -2 -463" fill="none" stroke="#05070d" strokeWidth="23" strokeLinecap="round"/>
             <path d="M15 -429 Q28 -507 89 -491 Q113 -481 81 -436" fill="none" stroke="#05070d" strokeWidth="23" strokeLinecap="round"/>
