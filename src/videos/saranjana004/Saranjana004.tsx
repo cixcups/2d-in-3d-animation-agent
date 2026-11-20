@@ -35,9 +35,23 @@ function Skyline({ opacity = 1, frame = 0, wide = false }: { opacity?: number; f
           </g>
         );
       })}
+      {/* Saranjana signature tower, luminous crown and floating halo */ }
+      <g>
+        <path d="M510 1480 L510 870 L526 870 L540 620 L554 870 L570 870 L570 1480Z" fill="#142c58" stroke="#86dfff" strokeWidth={5}/>
+        <path d="M540 620 L540 520 L548 620" fill="none" stroke="#fff0ad" strokeWidth={7}/>
+        <path d="M522 900 H558 M518 970 H562 M515 1050 H565 M512 1140 H568 M510 1240 H570 M510 1350 H570" stroke="#56e6ff" strokeWidth={9} opacity={0.9}/>
+        <ellipse cx="540" cy="910" rx="110" ry="20" fill="none" stroke="#ffe18b" strokeWidth={8} opacity={0.9}/>
+        <ellipse cx="540" cy="910" rx="130" ry="31" fill="none" stroke="#52dcff" strokeWidth={3} opacity={0.75}/>
+        <path d="M420 1480 Q430 1370 540 1340 Q650 1370 660 1480Z" fill="#173a6c" stroke="#6fe7ff" strokeWidth={7}/>
+        <path d="M455 1480 Q465 1390 540 1370 Q615 1390 625 1480" fill="none" stroke="#ffe08a" strokeWidth={8}/>
+        <path d="M490 1480 V1410 Q540 1360 590 1410 V1480" fill="#0b1a36" stroke="#6fe7ff" strokeWidth={6}/>
+      </g>
       <path d="M0 1480 H1080 V1570 H0Z" fill="#09152f" />
       <path d="M0 1480 Q540 1430 1080 1480" fill="none" stroke="#ffd56a" strokeWidth={8} opacity={0.8} />
       <path d="M300 1480 Q540 1320 780 1480" fill="none" stroke="#46dfff" strokeWidth={7} opacity={0.55 + 0.15 * Math.sin(frame * 0.08)} />
+      <g opacity={0.55}>
+        {Array.from({length: 22}).map((_,i)=><path key={i} d={`M${390+i*14} 1510 l${(i%2?1:-1)* (8+(i%5)*3)} 250`} stroke={i%3===0?"#ffe18b":"#4bdcff"} strokeWidth={4+(i%3)} opacity={0.4}/>)}
+      </g>
       {wide ? <path d="M0 1600 H1080" stroke="#4fc8ff" strokeWidth={5} opacity={0.35} /> : null}
     </g>
   );
@@ -74,6 +88,19 @@ function Backdrop({ frame = 0, cityOpacity = 0.9, purple = false, fog = false, w
       </g>
       <path d="M0 1690 Q240 1580 470 1690 Q720 1570 1080 1680 V1920 H0Z" fill="#071620" />
       <path d="M0 1760 Q260 1670 520 1770 Q810 1650 1080 1750" fill="none" stroke="#214b39" strokeWidth="18" />
+      {/* Layered foreground foliage and stones for a hand-illustrated forest frame */}
+      <g stroke="#07120f" strokeWidth="12" strokeLinejoin="round">
+        <path d="M0 1850 Q65 1740 140 1815 Q180 1700 255 1790 Q310 1750 350 1850Z" fill="#164b32"/>
+        <path d="M760 1890 Q820 1760 890 1820 Q950 1690 1010 1790 Q1050 1760 1080 1840V1920H760Z" fill="#174d34"/>
+        <path d="M40 1920 Q80 1830 155 1880 Q210 1815 270 1920Z" fill="#286b3d"/>
+        <path d="M850 1920 Q900 1810 970 1870 Q1020 1810 1080 1900V1920Z" fill="#2a7041"/>
+      </g>
+      <g fill="#68a94d" stroke="#173b28" strokeWidth="7">
+        {Array.from({length:18}).map((_,i)=><ellipse key={i} cx={25+i*62} cy={1800+(i%4)*26} rx={36+(i%3)*7} ry={17+(i%2)*6} transform={`rotate(${(i%2?1:-1)*22} ${25+i*62} ${1800+(i%4)*26})`}/>)}
+      </g>
+      <g fill="#263d3b" stroke="#0a1718" strokeWidth="8">
+        <path d="M250 1920 l70 -95 110 95Z"/><path d="M650 1920 l90 -70 90 70Z"/>
+      </g>
       {fog ? (
         <g opacity="0.82">
           <path d={`M${-500 + fogShift} 1330 Q${-100 + fogShift} 1190 ${250 + fogShift} 1330 T${1050 + fogShift} 1330`} fill="none" stroke="url(#fogGrad)" strokeWidth="150" />
@@ -100,22 +127,33 @@ function BangStick({ x, y, scale = 1, mood = "curious", frame = 0, walking = fal
     <g transform={`translate(${x} ${y + bob}) scale(${scale})`} stroke="#05070d" strokeWidth="22" strokeLinecap="round" strokeLinejoin="round">
       <path d={`M-10 135 L-75 ${315 + step}`} fill="none" />
       <path d={`M10 135 L75 ${315 - step}`} fill="none" />
-      <path d={`M-75 ${310 + step} q-65 8 -75 70 q-4 32 38 35 h92 q30 -10 12 -42 l-28 -48Z`} fill="#fff" />
-      <path d={`M75 ${310 - step} q65 8 75 70 q4 32 -38 35 h-92 q-30 -10 -12 -42 l28 -48Z`} fill="#fff" />
+      <path d={`M-75 ${310 + step} q-65 8 -75 70 q-4 32 38 35 h92 q30 -10 12 -42 l-28 -48Z`} fill="url(#bangShoeShade)" />
+      <path d={`M75 ${310 - step} q65 8 75 70 q4 32 -38 35 h-92 q-30 -10 -12 -42 l28 -48Z`} fill="url(#bangShoeShade)" />
+      <path d={`M-142 ${390+step} Q-75 ${420+step} -12 ${397+step}`} fill="none" stroke="#9da4b7" strokeWidth="7"/>
+      <path d={`M12 ${397-step} Q75 ${420-step} 142 ${390-step}`} fill="none" stroke="#9da4b7" strokeWidth="7"/>
       <path d="M0 -170 L0 150" fill="none" strokeWidth="34" />
       <path d={leftArm} fill="none" strokeWidth="24" />
       <path d={rightArm} fill="none" strokeWidth="24" />
-      <g fill="#fff" strokeWidth="13">
+      <g fill="#fff" strokeWidth="11">
         <ellipse cx={mood === "shock" ? -175 : mood === "happy" ? -160 : -150} cy={mood === "shock" ? -210 : mood === "happy" ? -310 : -30} rx="47" ry="38" />
         <ellipse cx={mood === "shock" ? 175 : mood === "happy" ? 160 : 150} cy={mood === "shock" ? -210 : mood === "happy" ? -310 : -30} rx="47" ry="38" />
+        <circle cx={mood === "shock" ? -204 : -174} cy={mood === "shock" ? -236 : -50} r="19"/>
+        <circle cx={mood === "shock" ? -190 : -150} cy={mood === "shock" ? -248 : -66} r="18"/>
+        <circle cx={mood === "shock" ? 204 : 174} cy={mood === "shock" ? -236 : -50} r="19"/>
+        <circle cx={mood === "shock" ? 190 : 150} cy={mood === "shock" ? -248 : -66} r="18"/>
       </g>
-      <ellipse cx="0" cy="-300" rx="132" ry="132" fill="#fff" strokeWidth="12" />
+      <defs>
+        <radialGradient id="bangHeadShade" cx="35%" cy="28%" r="75%"><stop offset="0" stopColor="#ffffff"/><stop offset="0.72" stopColor="#fbfbff"/><stop offset="1" stopColor="#c9cde0"/></radialGradient>
+        <linearGradient id="bangShoeShade" x1="0" y1="0" x2="0.2" y2="1"><stop offset="0" stopColor="#ffffff"/><stop offset="1" stopColor="#cfd2df"/></linearGradient>
+      </defs>
+      <ellipse cx="0" cy="-300" rx="132" ry="132" fill="url(#bangHeadShade)" strokeWidth="12" />
       <path d="M-54 -424 Q-108 -500 -42 -512 Q-12 -513 -1 -462" fill="none" strokeWidth="21" />
       <path d="M15 -429 Q28 -504 87 -488 Q110 -480 80 -435" fill="none" strokeWidth="21" />
       <g fill="#05070d" stroke="none">
         <ellipse cx="-43" cy="-318" rx="19" ry="38" />
         <ellipse cx="43" cy="-318" rx="19" ry="38" />
       </g>
+      <g fill="#fff" stroke="none"><ellipse cx="-49" cy="-334" rx="6" ry="11"/><ellipse cx="37" cy="-334" rx="6" ry="11"/></g>
       {mood === "shock" ? <ellipse cx="0" cy="-244" rx="29" ry="42" fill="#b40f19" strokeWidth="8" /> : null}
       {mood === "happy" ? <path d="M-43 -252 Q0 -190 43 -252 Q35 -197 0 -195 Q-35 -197 -43 -252Z" fill="#a90816" strokeWidth="7" /> : null}
       {mood === "determined" ? <path d="M-45 -245 Q0 -270 45 -245" fill="none" strokeWidth="11" /> : null}
