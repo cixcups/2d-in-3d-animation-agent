@@ -1,5 +1,5 @@
 import React from "react";
-import { AbsoluteFill, Sequence, interpolate, useCurrentFrame } from "remotion";
+import { AbsoluteFill, Audio, Sequence, interpolate, staticFile, useCurrentFrame } from "remotion";
 
 const W = 1080;
 const H = 1920;
